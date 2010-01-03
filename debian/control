@@ -1,11 +1,9 @@
 Source: ppl
-Section: libs
+Section: host/tools
 Priority: optional
-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
-Uploaders: Michael Tautschnig <mt@debian.org>, Arthur Loiret <aloiret@debian.org>
+Maintainer: Mikhail Gusarov <dottedmag@dottedmag.net>
 Standards-Version: 3.8.3
-Build-Depends: debhelper (>= 6.0.7~), quilt, libgmp3-dev (>= 4.1.3), autoconf, automake, libtool, autotools-dev, swi-prolog
-Build-Depends-Indep: doxygen, graphviz, texlive-base-bin, texlive-latex-extra, texlive-latex-recommended, texlive-fonts-recommended, xpdf-utils | poppler-utils, ghostscript, texlive-extra-utils
+Build-Depends: debhelper (>= 6.0.7~), quilt, libgmp3-dev (>= 4.1.3), autoconf, automake, libtool, autotools-dev
 Homepage: http://www.cs.unipr.it/ppl/
 
 Package: libppl7
@@ -24,7 +22,6 @@ Description: Parma Polyhedra Library (runtime library)
 
 Package: libppl0.10-dev
 Architecture: any
-Section: libdevel
 Depends: libppl7 (= ${binary:Version}), libppl-c2 (= ${binary:Version}), ${shlibs:Depends}
 Provides: libppl-c-dev, libppl-dev
 Recommends: libgmp3-dev (>= 4.1.3)
@@ -72,7 +69,6 @@ Description: Parma Watchdog Library (Watchdog timers - runtime library)
 
 Package: libpwl-dev
 Architecture: any
-Section: libdevel
 Depends: libpwl4 (= ${binary:Version}), ${shlibs:Depends}
 Provides: libppl-pwl-dev
 Replaces: libpwl3
@@ -83,35 +79,3 @@ Description: Parma Watchdog Library (Watchdog timers - development)
  but is totally independent from it.
  .
  This package provides the header files and static libraries.
-
-Package: libppl-doc
-Architecture: all
-Section: doc
-Description: Parma Polyhedra Library: Documentation
- The Parma Polyhedra Library (PPL) is a C++ library for the
- manipulation of (not necessarily closed) convex polyhedra and other
- numerical abstractions.  The applications of convex polyhedra include
- program analysis, optimized compilation, integer and combinatorial
- optimization and statistical data-editing.  The Parma Polyhedra
- Library is user friendly (you write `x + 2*y + 5*z <= 7' when you
- mean it), fully dynamic (available virtual memory is the only
- limitation to the dimension of anything), written in standard C++,
- exception-safe, rather efficient and thoroughly documented.
- .
- This package provides the documentation.
-
-Package: libppl-swi
-Architecture: any
-Depends: libppl7 (= ${binary:Version}), ${shlibs:Depends}, swi-prolog
-Description: Parma Polyhedra Library (SWI Prolog interface)
- The Parma Polyhedra Library (PPL) is a C++ library for the
- manipulation of (not necessarily closed) convex polyhedra and other
- numerical abstractions.  The applications of convex polyhedra include
- program analysis, optimized compilation, integer and combinatorial
- optimization and statistical data-editing.  The Parma Polyhedra
- Library is user friendly (you write `x + 2*y + 5*z <= 7' when you
- mean it), fully dynamic (available virtual memory is the only
- limitation to the dimension of anything), written in standard C++,
- exception-safe, rather efficient and thoroughly documented.
- .
- This package provides the SWI Prolog interface.

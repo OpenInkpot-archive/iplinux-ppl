@@ -1,3 +1,9 @@
+ppl (0.10.2-3.ip1) zelazny; urgency=low
+
+  * First build for IPlinux.
+
+ -- Mikhail Gusarov <dottedmag@dottedmag.net>  Sun, 03 Jan 2010 04:51:24 +0600
+
 ppl (0.10.2-3) unstable; urgency=low
 
   * Bumped Standars-Version to 3.8.3 (no changes).

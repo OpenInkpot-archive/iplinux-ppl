@@ -32,7 +32,7 @@ endif
 # FOR AUTOCONF 2.52 AND NEWER ONLY
 confflags += --build $(DEB_BUILD_GNU_TYPE) --host $(DEB_HOST_GNU_TYPE)
 # only build the C and C++ interfaces
-confflags += --enable-interfaces=c,cxx,swi_prolog --disable-ppl_lpsol --disable-ppl_lcdd
+confflags += --enable-interfaces=c,cxx --disable-ppl_lpsol --disable-ppl_lcdd
 
 ifneq (,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
   with_check := disabled by DEB_BUILD_OPTIONS.
@@ -90,7 +90,7 @@ endif
 
 build-indep: build-indep-stamp
 build-indep-stamp: configure-stamp
-	export save_size=10000 ; $(MAKE) -C doc user-configured
+	#export save_size=10000 ; $(MAKE) -C doc user-configured
 	touch $@
 
 clean: unpatch
@@ -106,17 +106,10 @@ clean: unpatch
 install: install-indep install-arch
 
 # Destination directory for user manual.
-DOC_DIR=$(CURDIR)/debian/tmp/usr/share/doc/ppl
 install-indep: build-indep
 	dh_testdir
 	dh_testroot
 	dh_installdirs -i
-#	Build all the documentation, then move it into debian/tmp
-#	directories which have fixed names.
-	mkdir -p $(DOC_DIR)/html || exit 1
-	mv $(DOC_DIR)/ppl-user-$(PPL_VERSION)-html $(DOC_DIR)/html/user-manual
-	mv $(DOC_DIR)/ppl-user-$(PPL_VERSION).pdf $(DOC_DIR)/ppl-user-browse.pdf
-	mv $(DOC_DIR)/ppl-user-$(PPL_VERSION).ps.gz $(DOC_DIR)/ppl-user-print.ps.gz
 
 install-arch: build-arch check
 	dh_testdir
@@ -132,14 +125,10 @@ binary-arch: install-arch
 	dh_testroot
 	dh_installchangelogs -s -Nlibpwl-dev -Nlibpwl4 ChangeLog
 	dh_installchangelogs -plibpwl-dev -plibpwl4 Watchdog/ChangeLog
-	dh_installdocs -s
 	dh_install -s --sourcedir=debian/tmp
 #	dh_installexamples -s
 #	dh_installinfo -s
 #	dh_installman -s
-#	These directories will be symlinks instead.
-	rm -rf debian/libppl-c2/usr/share/doc/libppl-c2
-	rm -rf debian/libppl-swi/usr/share/doc/libppl-swi
 	dh_link -s
 	dh_strip -s
 	dh_compress -s
@@ -156,7 +145,6 @@ binary-indep: install-indep
 	dh_testroot
 	dh_install -i --sourcedir=debian/tmp
 	dh_installchangelogs -i ChangeLog
-	dh_installdocs -i
 	dh_link -i
 	dh_compress -i
 	dh_fixperms -i
